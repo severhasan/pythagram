@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://drive.google.com/uc?export=view&id=1jeklgJUZnMAPYyHFVPOm9twPTmrL-Hlf">
+    <script src="https://kit.fontawesome.com/4702804624.js"></script>
+<!--    Django Blog - -->
+    {% if title %}
+    <title>{{ title }} </title>
+    {% else %}
+    <title>Pythagram</title>
+    {% endif %}
+</head>
+<body>
+
+    <div class="page-container">
+        <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark"> <!--fixed-top-->
+                <div class="container">
+                    <img src="https://www.dropbox.com/s/p8u2jyd3p1sb0it/default.png?dl=1" width="30" height="30" class="d-inline-block align-top" alt="company-logo">
+                    <a class="navbar-brand mr-4" href="/">Pytagram</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="navbar-nav mr-auto">
+                            <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+                            <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+                        </div>
+                        <!-- Navbar Right Side-->
+                        <div class="navbar-nav">
+                            {% if user.is_authenticated %}
+                            <a class="nav-item nav-link" href="{% url 'create-post' %}">New Post</a>
+                            <a class="nav-item nav-link" href="{% url 'profile' user.username %}">My Profile</a>
+                            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                            {% else %}
+                            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="container">
+            <div class="d-flex justify-content-center">
+                <div class="notification">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if forloop.last %}
+                            <span class="{{ message.tags }}">
+                                {% if user.is_authenticated %}
+                                    {% if user.first_name != '' %}
+                                        {{ message }} <strong>{{ user.first_name|capfirst }}!</strong>
+                                    {% else %}
+                                        {{ message }} <strong>{{ user.username }}!</strong>
+                                    {% endif %}
+                                {% else %}
+                                    {{ message }}.
+                                {% endif %}
+                            </span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {% block content %}{% endblock %}
+        </main>
+
+        <div class="before-footer"></div>
+
+        <footer class="bg-dark footer">
+            <div class="container text-white text-center">
+                Prepared by Hasan Sever as a draft-project on Django | 09.2019
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+        var notif;
+        if(document.querySelector(".notification")) {
+            notif = document.querySelector(".notification");
+            setTimeout(() => {
+                notif.style.display="none";
+                notif.remove();
+            }, 5000);
+        }
+    </script>
+
+    </body>
+</html>

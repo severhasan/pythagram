@@ -1,0 +1,9 @@
+{% extends "posts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+
+    <p><a href="{% url 'login' %}">Log in</a></p>
+
+{% endblock content %}

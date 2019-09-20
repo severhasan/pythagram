@@ -1,0 +1,326 @@
+body {
+  background: snow;
+  color: #333333;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.before-footer {
+    height: 4rem;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2rem;
+    padding-top: 0.4rem;
+}
+
+.following {
+    display: inline-block;
+    color: deepskyblue;
+    text-align: center;
+}
+.followers {
+    display: inline-block;
+    color: darkmagenta;
+    text-align: center;
+}
+.following .count, .followers .count{
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    border-top: 1px solid inherit;
+}
+.pagination span {
+    margin: 0 auto;
+    padding: 10px 20px;
+    border-bottom: 2px solid rgba(0,150,200, 0.2);
+}
+.pagination a{
+    margin: 0 1px;
+}
+
+.updateButtons {
+    margin-top: 1rem;
+}
+
+.updateLinks {
+    z-index: 4 !important;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    visibility: hidden;
+}
+.img-hover:hover .updateLinks {
+    visibility: visible;
+}
+
+.postCount {
+    font-size: 1.2rem;
+}
+
+.text-crimson {
+    color: crimson;
+}
+
+.card-body {
+    margin-bottom: -20px;
+}
+
+/* VIEW POST PAGE */
+.image-info {
+    margin-top: 14px;
+    color: darkmagenta;
+}
+
+.image-info a:hover{
+    text-decoration: none;
+    color: green;
+}
+
+.published-date {
+    margin-left: 30px;
+}
+
+.post-info {
+    font-weight: 500;
+}
+
+
+.postLikes a {
+    color: crimson;
+    font-size: 1.1rem;
+}
+.liked a{
+    font-size: 28px;
+    color: crimson;
+}
+
+.postLikes a:hover{
+    text-decoration: none;
+}
+.postLikes a:hover {
+    color: green;
+}
+
+.post-description {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+}
+
+/* Comment Styling */
+.comment1 {
+    color: dodgerblue;
+}
+.comment a {
+    font-size: 28px;
+    color: dodgerblue;
+    margin-right: 15px;
+}
+
+span.comment .comment1{
+    display:inline;
+}
+span.comment:hover .comment1 {
+    display:none;
+}
+
+span.comment .comment2{
+    display:none;
+}
+
+span.comment:hover .comment2{
+    display:inline;
+}
+/* Comment Styling --end */
+
+
+/* Heart Styling */
+div.heart {
+    display: inline-block;
+}
+
+.heart1 a, .heart2 a {
+    font-size: 28px;
+    color: crimson;
+}
+
+div.heart span.heart1 {
+    display:inline;
+}
+div.heart:hover span.heart1 {
+    display:none;
+}
+div.heart span.heart2 {
+    display:none;
+}
+div.heart:hover span.heart2 {
+    display:inline;
+}
+
+/* Heart Styling --end-- */
+
+/* VIEW POST PAGE --END-- */
+
+main {
+    margin-top: 40px;
+}
+
+.notification {
+    z-index: 4;
+    position: fixed;
+    margin-top: -20px;
+}
+
+.img-hover{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.img-hover .text{
+    display: block;
+    color: crimson;
+    position: absolute;
+    bottom:3.5rem;
+    text-align: center;
+    font-size: 34px;
+    visibility:hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.img-hover .text a {
+    color: white;
+}
+
+.text i {
+    transition: all 0.3s ease;
+}
+.text i:hover{
+    transform: scale(1.20);
+}
+
+.card-paragraph {
+    margin-top: -5rem;
+}
+
+
+.img-hover img{
+    transition: all 0.3s ease;
+}
+
+.img-hover:hover img{
+    filter: brightness(85%);
+}
+.img-hover:hover .text {
+    opacity: 1;
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+ul {
+  margin: 0;
+}
+
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.comment-bubble {
+    background: snow;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    margin: 2rem 0;
+    padding: 10px 0;
+}
+.comment-bubble p{
+    margin: 0 1.2rem;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.image-section {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.image-section .text-section {
+    padding: 10px 20px;
+}
+
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+  object-fit: contain;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}

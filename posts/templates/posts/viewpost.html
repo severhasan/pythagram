@@ -1,0 +1,157 @@
+{% extends "posts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="image-section">
+        <img class="img-fluid" src="{{ object.image.url }}">
+        <div class="text-section">
+            <div class="post-info">
+                <span class="comment">
+                    <a class="comment1" href="#"><i class="far fa-comment"></i></a>
+                    <a class="comment2" href="{{commentLink}}"><i class="fas fa-comment"></i></a>
+                </span>
+                <span class="postCount" style="margin-left: -1rem;">
+                    {{ object.comment_set.all|length }}
+                </span>
+                <span style="font-size: 30px;">
+                     |
+                </span>
+                <span>
+                    {% if object in user.userLikes.all %}
+                    <span class="liked">
+                        <a href="{% url 'like-post' object.id %}"><i class="fas fa-heart"></i></a>
+                    </span>
+                    {% else %}
+                    <div class="heart">
+                        <span class="heart1">
+                            <a href="#"><i class="far fa-heart"></i></a>
+                        </span>
+                        <span class="heart2">
+                            <a href="{% url 'like-post' object.id %}"><i class="fas fa-heart"></i></a>
+                        </span>
+                    </div>
+
+                    {% endif %}
+                    <span class="postCount">
+                        {{ postLikes|length }}
+                    </span>
+                    {% if postLikes|length == 0 %}
+                    <span>
+                        Be the first one to like the post!
+                    </span>
+                    {% else %}
+                    {% if user in postLikes %}
+                    {% if postLikes|length == 1 %}
+                    <span class="postLikes">
+                        <a href="{% url 'profile' user.username %}">You</a>
+                    </span>
+                    {% else %}
+                    <span class="postLikes">
+                        <a href="{% url 'profile' user.username %}">You</a>,
+                    </span>
+                    {% endif %}
+                    {% endif %}
+                    {% if postLikes|length < 5 %}
+                    {% for userLike in postLikes %}
+                    {% if not userLike == user %}
+                    {% if not forloop.last %}
+                    <span class="postLikes">
+                        <a href="{% url 'profile' userLike.username %}">{{userLike}}</a>,
+                    </span>
+                    {% else %}
+                    {% if postLikes|length == 1 %}
+                    <span class="postLikes">
+                        <a href="{% url 'profile' userLike.username %}">{{userLike}}</a>
+                    </span>
+                    {% else %}
+                    <span class="postLikes">
+                        and <a href="{% url 'profile' userLike.username %}">{{userLike}}</a>
+                    </span>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    {% else %}
+                    {% for userLike in object.postLikes.all|slice:":5" %}
+                    {% if not userLike == user %}
+                    <span class="postLikes">
+                        <a href="{% url 'profile' userLike.username %}"> {{ userLike }}, </a>
+                    </span>
+                    {% endif %}
+
+                    {% endfor %}
+                    <span>
+                        and more...
+                    </span>
+
+                    {% endif %}
+                    {% endif %}
+                </span>
+                <span class="image-info float-right">
+                    <i class="fas fa-at"></i></i> <a href="{% url 'profile' object.user.username %}">{{ object.user }}</a>
+                    <i class="fas fa-calendar-day published-date"></i>  <a href="#"> {{ object.date_posted|date:"M jS, Y" }} </a>
+                </span>
+            </div>
+
+            {% if not user.is_authenticated %}
+            <p><a href="{% url 'login' %}">Login</a> to like or comment!</p>
+            {% endif %}
+
+            {% if user == object.user %}
+            <div class="updateButtons">
+                <a class="btn btn-warning" href="{% url 'update-post' object.id %}">Update</a>
+                <a class="btn btn-danger" href="{% url 'delete-post' object.pk %}">Delete</a>
+            </div>
+            {% endif %}
+            <p class="post-description"> {{ object.description }} </p>
+        </div>
+
+    </div>
+
+
+    <div class="content-section">
+        <h2>Thoughts on the post</h2>
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment-bubble" id="comment{{comment.id}}">
+                    <p class="border-bottom">
+                        <a href="{% url 'profile' comment.user.username %}"> {{ comment.user.username }} </a>
+                        <span class="float-right">{{ comment.date_posted|timesince }} ago</span>
+                    </p>
+                    <p class="mt-3">{{ comment.text }}</p>
+                    <p class="mt-2">
+                        {% if comment.user == user %}
+                        <a class="btn btn-warning btn-sm" href="{% url 'update-comment' comment.pk %}">Edit</a>
+                        <a class="btn btn-danger btn-sm ml-2" href="{% url 'delete-comment' comment.pk %}">Delete</a>
+                        <input type="hidden" name="{{comment.pk}}">
+                        {% endif %}
+                    </p>
+                </div>
+
+            {% endfor %}
+        {% else %}
+        <div class="comment-bubble">
+            <p>No comments shared yet.</p>
+        </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <form id="comment" method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom pt-4">Share yours:</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Comment</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+{% endblock content %}
+
+
+
+
