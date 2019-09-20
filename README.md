@@ -1,17 +1,18 @@
-#Pythagram
-##Info
+# Pythagram
+
+## Info
 
 Here is the demo on heroku: [Pythagram](https://pythagram.herokuapp.com "Pythagram")
 -- This is not a complete app, there is still a need for refactoring --
 
-####Instagram-Like App
+#### Instagram-Like App
 This was initally a project that we worked together on in a Python-Django course after learning the basics. The aim here was to something similar to Instagram, but since the time was a problem, we were only able to create some features of it.
 
 I was later able to continue improving the application and added some new features to the application along with what I have learned in the course.
 
 For the tutorials, I have made substantial use of tutorials of [Corey MS](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g "Corey MS") on YouTube along with official documentation and Stack Overflow posts. Since Django relies on the ease of its class features, I felt a bit restricted and this is why I had to change a lot of code for what I originally had in my mind, so instead of classes, I had to use functions.
 
-##Features
+## Features
 - Users
     - have their own  profiles
     - can follow/unfollow each other
